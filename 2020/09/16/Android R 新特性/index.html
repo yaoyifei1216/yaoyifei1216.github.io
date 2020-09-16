@@ -1,0 +1,567 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Android R 新特性 | yifei</title><meta name="keywords" content="android,framework"><meta name="author" content="yaoyifei"><meta name="copyright" content="yaoyifei"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="Android R 新特性1、隐私权更新   隐私权变更 受影响的应用 缓解策略    强制执行分区存储机制 以 Android 11 为目标平台的应用始终会受分区存储行为的影响 以 Android 11 为目标平台的应用，以及以 Android 10 为目标平台且未将 requestLegacyExternalStorage 设为 true 以停用分区存储的应用 更新您的应用以使用分区存储 详细">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android R 新特性">
+<meta property="og:url" content="http://example.com/2020/09/16/Android%20R%20%E6%96%B0%E7%89%B9%E6%80%A7/index.html">
+<meta property="og:site_name" content="yifei">
+<meta property="og:description" content="Android R 新特性1、隐私权更新   隐私权变更 受影响的应用 缓解策略    强制执行分区存储机制 以 Android 11 为目标平台的应用始终会受分区存储行为的影响 以 Android 11 为目标平台的应用，以及以 Android 10 为目标平台且未将 requestLegacyExternalStorage 设为 true 以停用分区存储的应用 更新您的应用以使用分区存储 详细">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://www.dmoe.cc/random.php">
+<meta property="article:published_time" content="2020-09-16T15:43:49.087Z">
+<meta property="article:modified_time" content="2020-09-16T15:47:24.537Z">
+<meta property="article:author" content="yaoyifei">
+<meta property="article:tag" content="android">
+<meta property="article:tag" content="framework">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.dmoe.cc/random.php"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2020/09/16/Android%20R%20%E6%96%B0%E7%89%B9%E6%80%A7/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  hexoversion: '5.1.1',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":1,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: yaoyifei","link":"链接: ","source":"来源: yifei","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2020-09-16 23:47:24'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+  }
+}
+
+var autoChangeMode = 'true'
+var t = saveToLocal.get('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (saveToLocal.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><meta name="generator" content="Hexo 5.1.1"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">5</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">3</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">1</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 常用链接</span></a></div></div></div></div><div id="body-wrap"><div id="web_bg" data-type="color"></div><div id="sidebar"><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Android-R-%E6%96%B0%E7%89%B9%E6%80%A7"><span class="toc-number">1.</span> <span class="toc-text">Android R 新特性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E9%9A%90%E7%A7%81%E6%9D%83%E6%9B%B4%E6%96%B0"><span class="toc-number">1.1.</span> <span class="toc-text">1、隐私权更新</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1%E3%80%81%E5%BC%BA%E5%88%B6%E6%89%A7%E8%A1%8C%E5%88%86%E5%8C%BA%E5%AD%98%E5%82%A8%E6%9C%BA%E5%88%B6"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1、强制执行分区存储机制</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-1-1%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E5%88%86%E5%8C%BA%E5%AD%98%E5%82%A8%EF%BC%9F"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">1.1.1、什么是分区存储？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-1-2%E3%80%81%E5%85%B1%E4%BA%AB%E7%9B%AE%E5%BD%95%E6%9D%83%E9%99%90%E7%9A%84%E5%88%92%E5%88%86"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">1.1.2、共享目录权限的划分</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-1-3%E3%80%81android11%E7%9A%84%E4%B8%80%E4%BA%9B%E8%B0%83%E6%95%B4"><span class="toc-number">1.1.1.3.</span> <span class="toc-text">1.1.3、android11的一些调整</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2%E3%80%81%E5%8D%95%E6%AC%A1%E6%8E%88%E6%9D%83"><span class="toc-number">1.1.2.</span> <span class="toc-text">1.2、单次授权</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3%E3%80%81%E8%87%AA%E5%8A%A8%E9%87%8D%E7%BD%AE%E6%9D%83%E9%99%90"><span class="toc-number">1.1.3.</span> <span class="toc-text">1.3、自动重置权限</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4%E3%80%81%E5%85%B6%E4%BB%96%E4%B8%80%E4%BA%9B%E6%9D%83%E9%99%90%E7%9B%B8%E5%85%B3%E7%9A%84%E8%B0%83%E6%95%B4"><span class="toc-number">1.1.4.</span> <span class="toc-text">1.4、其他一些权限相关的调整</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-4-1%E3%80%81%E6%9D%83%E9%99%90%E5%AF%B9%E8%AF%9D%E6%A1%86%E7%9A%84%E5%8F%AF%E8%A7%81%E6%80%A7"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">1.4.1、权限对话框的可见性</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-4-2%E3%80%81%E7%B3%BB%E7%BB%9F%E6%8F%90%E9%86%92%E7%AA%97%E5%8F%A3%E5%8F%98%E6%9B%B4"><span class="toc-number">1.1.4.2.</span> <span class="toc-text">1.4.2、系统提醒窗口变更</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-4-3%E3%80%81%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E6%9D%83%E9%99%90%E5%8F%98%E6%9B%B4"><span class="toc-number">1.1.4.3.</span> <span class="toc-text">1.4.3、电话号码权限变更</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5%E3%80%81%E5%90%8E%E5%8F%B0%E4%BD%8D%E7%BD%AE%E4%BF%A1%E6%81%AF%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90"><span class="toc-number">1.1.5.</span> <span class="toc-text">1.5、后台位置信息访问权限</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-5-1%E3%80%81%E5%8D%95%E7%8B%AC%E8%AF%B7%E6%B1%82%E5%9C%A8%E5%90%8E%E5%8F%B0%E8%AE%BF%E9%97%AE%E4%BD%8D%E7%BD%AE%E4%BF%A1%E6%81%AF"><span class="toc-number">1.1.5.1.</span> <span class="toc-text">1.5.1、单独请求在后台访问位置信息</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-5-2%E3%80%81%E6%9D%83%E9%99%90%E5%AF%B9%E8%AF%9D%E6%A1%86%E7%9A%84%E5%8F%98%E6%9B%B4"><span class="toc-number">1.1.5.2.</span> <span class="toc-text">1.5.2、权限对话框的变更</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-6%E3%80%81%E8%BD%AF%E4%BB%B6%E5%8C%85%E5%8F%AF%E8%A7%81%E6%80%A7"><span class="toc-number">1.1.6.</span> <span class="toc-text">1.6、软件包可见性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-7%E3%80%81%E5%89%8D%E5%8F%B0%E6%9C%8D%E5%8A%A1"><span class="toc-number">1.1.7.</span> <span class="toc-text">1.7、前台服务</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-7-1%E3%80%81%E4%BD%BF%E7%94%A8%E6%97%B6%E8%AE%BF%E9%97%AE%E7%9A%84%E9%99%90%E5%88%B6"><span class="toc-number">1.1.7.1.</span> <span class="toc-text">1.7.1、使用时访问的限制</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-7-2%E3%80%81%E5%89%8D%E5%8F%B0%E6%9C%8D%E5%8A%A1%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.1.7.2.</span> <span class="toc-text">1.7.2、前台服务的类型</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E5%8A%9F%E8%83%BD%E5%92%8CAPI"><span class="toc-number">1.2.</span> <span class="toc-text">2、功能和API</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1%E3%80%81%E8%AE%BE%E5%A4%87%E6%8E%A7%E4%BB%B6"><span class="toc-number">1.2.1.</span> <span class="toc-text">2.1、设备控件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2%E3%80%81%E5%AA%92%E4%BD%93%E6%8E%A7%E4%BB%B6"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.2、媒体控件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3%E3%80%81%E5%B1%8F%E5%B9%95%E7%9B%B8%E5%85%B3"><span class="toc-number">1.2.3.</span> <span class="toc-text">2.3、屏幕相关</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4%E3%80%81%E4%BC%9A%E8%AF%9D%E7%9B%B8%E5%85%B3"><span class="toc-number">1.2.4.</span> <span class="toc-text">2.4、会话相关</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-5%E3%80%815G%E5%9B%BE%E6%A0%87%E6%98%BE%E7%A4%BA"><span class="toc-number">1.2.5.</span> <span class="toc-text">2.5、5G图标显示</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-6%E3%80%81%E5%AE%89%E5%85%A8%E7%9B%B8%E5%85%B3"><span class="toc-number">1.2.6.</span> <span class="toc-text">2.6、安全相关</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-7%E3%80%81%E6%80%A7%E8%83%BD%E5%92%8C%E8%B4%A8%E9%87%8F"><span class="toc-number">1.2.7.</span> <span class="toc-text">2.7、性能和质量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-8%E3%80%81%E5%85%B6%E4%BB%96%E5%8A%9F%E8%83%BD"><span class="toc-number">1.2.8.</span> <span class="toc-text">2.8、其他功能</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81Window-Management%E7%9A%84%E5%8F%98%E5%8C%96"><span class="toc-number">1.3.</span> <span class="toc-text">3、Window Management的变化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1%E3%80%81WM%E7%BB%93%E6%9E%84%E5%92%8C%E5%8A%9F%E8%83%BD%E7%9A%84%E5%8F%98%E5%8C%96"><span class="toc-number">1.3.1.</span> <span class="toc-text">3.1、WM结构和功能的变化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2%E3%80%81TaskOrganizer-API"><span class="toc-number">1.3.2.</span> <span class="toc-text">3.2、TaskOrganizer API</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3%E3%80%81%E6%96%B0%E7%9A%84WindowInsets"><span class="toc-number">1.3.3.</span> <span class="toc-text">3.3、新的WindowInsets</span></a></li></ol></li></ol></li></ol></div></div></div><header class="post-bg" id="page-header" style="background-image: url(http://www.dmoe.cc/random.php)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">yifei</a></span><span id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 常用链接</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">Android R 新特性</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-09-16T15:43:49.087Z" title="发表于 2020-09-16 23:43:49">2020-09-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-09-16T15:47:24.537Z" title="更新于 2020-09-16 23:47:24">2020-09-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="meta-secondline"> </div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h2 id="Android-R-新特性"><a href="#Android-R-新特性" class="headerlink" title="Android R 新特性"></a>Android R 新特性</h2><h3 id="1、隐私权更新"><a href="#1、隐私权更新" class="headerlink" title="1、隐私权更新"></a>1、隐私权更新</h3><table>
+<thead>
+<tr>
+<th align="left">隐私权变更</th>
+<th align="left">受影响的应用</th>
+<th align="left">缓解策略</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>强制执行分区存储机制</strong> 以 Android 11 为目标平台的应用始终会受分区存储行为的影响</td>
+<td align="left">以 Android 11 为目标平台的应用，以及以 Android 10 为目标平台且未将 <code>requestLegacyExternalStorage</code> 设为 <code>true</code> 以停用分区存储的应用</td>
+<td align="left">更新您的应用以使用分区存储 <a target="_blank" rel="noopener" href="https://developer.android.google.cn/preview/privacy/storage#scoped-storage">详细了解分区存储变更</a></td>
+</tr>
+<tr>
+<td align="left"><strong>单次授权</strong> 使用单次授权功能，用户可以授予对位置信息、麦克风和摄像头的临时访问权限</td>
+<td align="left">以任何版本为目标平台且请求位置信息、麦克风或摄像头权限的应用</td>
+<td align="left">在尝试访问受某项权限保护的数据之前，检查您的应用是否具有该权限 <a target="_blank" rel="noopener" href="https://developer.android.google.cn/training/permissions/requesting">遵循请求权限方面的最佳做法</a></td>
+</tr>
+<tr>
+<td align="left"><strong>自动重置权限</strong> 如果用户在 Android 11 上几个月未与应用互动，系统会自动重置应用的敏感权限</td>
+<td align="left">以 Android 11 为目标平台且在后台执行大部分工作的应用</td>
+<td align="left">要求用户阻止系统重置应用的权限 <a target="_blank" rel="noopener" href="https://developer.android.google.cn/preview/privacy/permissions#auto-reset">详细了解自动重置权限</a></td>
+</tr>
+<tr>
+<td align="left"><strong>后台位置信息访问权限</strong> Android 11 更改了用户向应用授予后台位置信息权限的方式</td>
+<td align="left">以 Android 11 为目标平台且需要访问<a target="_blank" rel="noopener" href="https://developer.android.google.cn/training/location/permissions#background">后台位置信息</a>的应用</td>
+<td align="left">通过对权限请求方法的多次单独调用，逐步请求前台（粗略或精确）和后台位置权限。必要时，说明用户授予该权限所能得到的益处 <a target="_blank" rel="noopener" href="https://developer.android.google.cn/preview/privacy/location#background-location">详细了解 Android 11 中的后台位置信息访问权限</a></td>
+</tr>
+<tr>
+<td align="left"><strong>软件包可见性</strong> Android 11 更改了应用查询同一设备上的其他已安装应用及与之互动的方式</td>
+<td align="left">以 Android 11 为目标平台且与设备上的其他已安装应用交互的应用</td>
+<td align="left">将 <code>&lt;queries&gt;</code> 元素添加到应用的清单 <a target="_blank" rel="noopener" href="https://developer.android.google.cn/preview/privacy/package-visibility">详细了解软件包可见性</a></td>
+</tr>
+<tr>
+<td align="left"><strong>前台服务</strong> Android 11 更改了前台服务访问位置信息、摄像头和麦克风相关数据的方式</td>
+<td align="left">以任何版本为目标平台且在前台服务中访问位置信息、摄像头或麦克风的应用</td>
+<td align="left">分别针对需要访问摄像头和麦克风的前台服务，声明 <code>camera</code> 和 <code>microphone</code> 前台服务类型。但请注意，应用在后台运行时启动的前台服务通常无法访问位置信息、摄像头或麦克风。 <a target="_blank" rel="noopener" href="https://developer.android.google.cn/preview/privacy/foreground-services">详细了解前台服务的变更</a></td>
+</tr>
+</tbody></table>
+<h4 id="1-1、强制执行分区存储机制"><a href="#1-1、强制执行分区存储机制" class="headerlink" title="1.1、强制执行分区存储机制"></a>1.1、强制执行分区存储机制</h4><p><u>首先要知道的是：</u></p>
+<p><strong>Android 中存储可以分为两大类：私有存储和共享存储</strong></p>
+<ul>
+<li><p>私有存储 (Private Storage) : 每个应用在都拥有自己的私有目录，其它应用看不到，彼此也无法访问到该目录</p>
+<p><strong>内部</strong>存储私有目录 (/data/data/packageName) </p>
+<p><strong>外部</strong>存储私有目录 (/sdcard/Android/data/packageName)</p>
+</li>
+<li><p>共享存储 (Shared Storage) : 存储其他应用可访问文件， 包含媒体文件、文档文件以及其他文件，</p>
+<p>对应设备DCIM、Pictures、Alarms、Music、Notifications、Podcasts、Ringtones、Movies、Download等目录</p>
+</li>
+</ul>
+<h5 id="1-1-1、什么是分区存储？"><a href="#1-1-1、什么是分区存储？" class="headerlink" title="1.1.1、什么是分区存储？"></a>1.1.1、什么是分区存储？</h5><p>因为大部分应用都会请求 ( READ_EXTERNAL_STORAGE ) ( WRITE_EXTERNAL_STORAGE ) 存储权限，来做一些诸如在 SD 卡中存储文件或者读取多媒体文件等常规操作。这些应用可能会在磁盘中存储大量文件，即使应用被卸载了还会依然存在。另外，这些应用还可能会读取其他应用的一些敏感文件数据。为此，Google 在 Android 10 中引入了<strong>分区存储</strong>，<strong>对权限进行场景的细分，按需索取</strong></p>
+<p><strong>也就是说分区存储机制早在android 10 就已经引入了，只是在 Android 11 中进行了进一步的调整，需要强制执行并做了一些调整</strong></p>
+<h5 id="1-1-2、共享目录权限的划分"><a href="#1-1-2、共享目录权限的划分" class="headerlink" title="1.1.2、共享目录权限的划分"></a>1.1.2、共享目录权限的划分</h5><p>Android 10 中主要对共享目录进行了权限详细的划分，不再能通过绝对路径访问</p>
+<p><strong>访问不同分区的方式：</strong></p>
+<ol>
+<li>私有目录：和以前的版本一致，可通过 File() API 访问，无需申请权限</li>
+<li>共享目录：需要通过MediaStore和Storage Access Framework API 访问，视具体情况申请权限</li>
+</ol>
+<p>其中，对共享目录的权限进行了细分：</p>
+<ol>
+<li>无需申请权限的操作：<br>通过 MediaStore API对媒体集、文件集进行媒体/文件的添加、对 <strong>自身APP</strong> 创建的 媒体/文件 进行查询、修改、删除的操作</li>
+<li>需要申请READ_EXTERNAL_STORAGE 权限：<br>通过 MediaStore API对所有的媒体集进行查询、修改、删除的操作。</li>
+<li>调用 Storage Access Framework API ：<br>会启动系统的文件选择器向用户申请操作指定的文件</li>
+</ol>
+<p>新的访问方式：</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzA4OTIwNS02NDM3NWRkN2JiZjRkZTFm?x-oss-process=image/format,png" alt="img"></p>
+<h5 id="1-1-3、android11的一些调整"><a href="#1-1-3、android11的一些调整" class="headerlink" title="1.1.3、android11的一些调整"></a>1.1.3、android11的一些调整</h5><ul>
+<li><p><strong>新的权限MANAGE_EXTERNAL_STORAGE</strong></p>
+<p>在 Android 11 上，使用分区存储模型的应用只能访问自身的应用专用缓存文件。如果您的应用需要管理设备存储空间，请执行以下操作：</p>
+<p>1.在清单中声明 MANAGE_EXTERNAL_STORAGE 权限<br>2.使用 ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION intent 操作将用户引导至一个系统设置页面，在该页面上，用户可以的应用启用以下选项：授予所有文件的管理权限</p>
+</li>
+</ul>
+<ol>
+<li>MANAGE_EXTERNAL_STORAGE : 类似以前的 READ_EXTERNAL_STORAGE + WRITE_EXTERNAL_STORAGE ，除了应用专有目录都可以访问</li>
+<li>如果设备上的可用空间不足，请提示用户同意让应用清除所有缓存。为此，请调用 ACTION_CLEAR_APP_CACHE intent 操作<br> <strong>注意</strong>：<code>ACTION_CLEAR_APP_CACHE</code> intent 操作会严重影响设备的电池续航时间，并且可能会从设备上移除大量的文件</li>
+<li>在 Google Play 上架的话，需要提交使用此权限的说明，只有指定的几种类型的 APP 才能使用</li>
+</ol>
+<ul>
+<li><p><strong>新增执行批量操作</strong></p>
+<p>为实现各种设备之间的一致性并增加用户便利性，Android 11 向 [<code>MediaStore</code>] API 中添加了多种方法。对于希望简化特定媒体文件更改流程（例如在原位置编辑照片）的应用而言，这些方法尤为有用</p>
+<p>添加的方法如下：</p>
+<ul>
+<li><p>[<code>createWriteRequest()</code>]</p>
+<p>用户向应用授予对指定媒体文件组的写入访问权限的请求</p>
+</li>
+<li><p>[<code>createFavoriteRequest()</code>]</p>
+<p>用户将设备上指定的媒体文件标记为“收藏”的请求。对该文件具有读取访问权限的任何应用都可以看到用户已将该文件标记为“收藏”</p>
+</li>
+<li><p>[<code>createTrashRequest()</code>]</p>
+<p>用户将指定的媒体文件放入设备垃圾箱的请求。垃圾箱中的内容会在系统定义的时间段后被永久删除。<strong>注意</strong>：如果您的应用是设备 OEM 的预安装图库应用，您可以将文件放入垃圾箱而不显示对话框。如需执行该操作，请直接将 [<code>IS_TRASHED</code>] 设置为 <code>1</code></p>
+</li>
+<li><p>[<code>createDeleteRequest()</code>]</p>
+<p>用户立即永久删除指定的媒体文件（而不是先将其放入垃圾箱）的请求</p>
+</li>
+</ul>
+<p>系统在调用以上任何一个方法后，会构建一个 [<code>PendingIntent</code>]对象。应用调用此 intent 后，用户会看到一个对话框，请求用户同意应用更新或删除指定的媒体文件</p>
+<p>例如，以下是构建 <code>createWriteRequest()</code> 调用的方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="comment">//developer.android.google.cn/previewList&lt;Uri&gt; urisToModify = /* A collection of content URIs to modify. */</span></span><br><span class="line">PendingIntent editPendingIntent = MediaStore.createWriteRequest(contentResolver,</span><br><span class="line">                  urisToModify);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Launch a system prompt requesting user permission for the operation.</span></span><br><span class="line">startIntentSenderForResult(editPendingIntent.getIntentSender(),</span><br><span class="line">    EDIT_REQUEST_CODE, <span class="keyword">null</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+
+<p>评估用户的响应，然后继续操作，或者在用户不同意时向用户说明您的应用为何需要获取权限：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onActivityResult</span><span class="params">(<span class="keyword">int</span> requestCode, <span class="keyword">int</span> resultCode,</span></span></span><br><span class="line"><span class="function"><span class="params">                   <span class="meta">@Nullable</span> Intent data)</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">if</span> (requestCode == EDIT_REQUEST_CODE) &#123;</span><br><span class="line">        <span class="keyword">if</span> (resultCode == Activity.RESULT_OK) &#123;</span><br><span class="line">            <span class="comment">/* Edit request granted; proceed. */</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">/* Edit request not granted; explain to the user. */</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>createFavoriteRequest()、createTrashRequest()和 createDeleteRequest()使用方法一样</p>
+</li>
+<li><p><strong>使用直接文件路径和原生库访问文件</strong></p>
+<p> 为了帮助应用更顺畅地使用第三方媒体库，Android 11 允许使用除 MediaStore API 之外的 API 访问共享存储空间中的媒体文件。也可以转而选择使用以下任一 API 直接访问媒体文件：</p>
+<p> File API<br> 原生库，例如 fopen()</p>
+<p> <strong>性能：</strong></p>
+<p> 通过 File () 等直接通过路径访问的 API 实际上也会映射为MediaStore API<br> 按文件路径顺序读取的时候性能相当；随机读取和写入的时候则会更慢</p>
+<p><strong>简单来说就是，可以通过 File() 等API 访问有权限访问的媒体集了，还是推荐使用MediaStoreAPI</strong></p>
+</li>
+<li><p><strong>限制访问其他应用中的数据</strong></p>
+<p><u>访问内部存储设备上的数据目录</u></p>
+<p>如果应用以 Android 11 为目标平台，则不能访问其他任何应用的数据目录中的文件，即使其他应用以 Android 8.1或更低版本为目标平台且已使其数据目录中的文件全局可读也是如此</p>
+<p><u>访问外部存储设备上的应用专用目录</u></p>
+<p>在 Android 11 上，应用无法再访问外部存储设备中的任何其他应用的专用于特定应用的目录中的文件</p>
+<p><strong>简言之在 Android 11 上不能访问其他应用中的数据了</strong></p>
+</li>
+<li><p><strong>文档访问限制</strong></p>
+<p>访问目录</p>
+<p>无法再使用 [<code>ACTION_OPEN_DOCUMENT_TREE</code>] intent 操作请求访问以下目录：</p>
+<ul>
+<li>内部存储卷的根目录</li>
+<li>设备制造商认为可靠的各个 SD 卡卷的根目录，无论该卡是模拟卡还是可移除的卡。可靠的卷是指应用在大多数情况下可以成功访问的卷</li>
+<li><code>Download</code> 目录</li>
+</ul>
+<p>访问文件</p>
+<p>无法再使用 <code>ACTION_OPEN_DOCUMENT_TREE</code> 或 [<code>ACTION_OPEN_DOCUMENT</code>]intent 操作请求用户从以下目录中选择单独的文件：</p>
+<ul>
+<li><code>Android/data/</code> 目录及其所有子目录</li>
+<li><code>Android/obb/</code> 目录及其所有子目录</li>
+</ul>
+<p><strong>Android 11 上访问设备上的文档受到了更大的限制</strong></p>
+</li>
+</ul>
+<h4 id="1-2、单次授权"><a href="#1-2、单次授权" class="headerlink" title="1.2、单次授权"></a>1.2、单次授权</h4><p>在 Android 11 中，每当应用请求与位置信息、麦克风或摄像头相关的权限时，面向用户的权限对话框会包含<strong>仅限这一次</strong>选项。如果用户在对话框中选择此选项，系统会向应用授予临时的单次授权</p>
+<p>然后，应用可以在一段时间内访问相关数据，具体时间取决于应用的行为和用户的操作：</p>
+<ul>
+<li>当应用的 Activity 可见时，应用可以访问相关数据</li>
+<li>如果用户将应用转为后台运行，应用可以在短时间内继续访问相关数据</li>
+<li>如果您在 Activity 可见时启动了一项前台服务，并且用户随后将您的应用转到后台，那么您的应用可以继续访问相关数据，直到该前台服务停止</li>
+<li>如果用户撤消单次授权（例如在系统设置中撤消），无论您是否启动了前台服务，应用都无法访问相关数据。与任何权限一样，如果用户撤消了应用的单次授权，应用进程就会终止</li>
+</ul>
+<p>当用户下次打开应用并且应用中的某项功能请求访问位置信息、麦克风或摄像头时，系统会再次提示用户授予权限。</p>
+<p>下图为MIUI12中的‘单次授权’：</p>
+<img src="/home/yaoyifei/图片/Screenshot_2020-09-10-17-38-05-145_com.miui.securitycenter.jpg" alt="Screenshot_2020-09-10-17-38-05-145_com.miui.securitycenter" style="zoom: 25%;" />
+
+<h4 id="1-3、自动重置权限"><a href="#1-3、自动重置权限" class="headerlink" title="1.3、自动重置权限"></a>1.3、自动重置权限</h4><p>如果应用以 Android 11 为目标平台并且数月未使用，系统会通过自动重置用户已授予应用的运行时敏感权限来保护用户数据。此操作与用户在系统设置中查看权限并将应用的访问权限级别更改为<strong>拒绝</strong>的做法效果一样</p>
+<p><strong>用户停用自动重置功能</strong></p>
+<ol>
+<li>点按<strong>权限</strong>，系统会加载<strong>应用权限</strong>设置屏幕</li>
+<li>关闭<strong>如果未使用此应用，则移除相关权限</strong>选项（设置-&gt;应用和通知-&gt;具体应用-&gt;权限）</li>
+</ol>
+<p><strong>确定是否已停用自动重置功能</strong><br>调用 isAutoRevokeWhitelisted()。如果此方法返回true，则系统不会自动重置应用的权限</p>
+<p><strong>测试自动重置功能</strong></p>
+<p>如需验证系统是否重置了应用的权限，请执行以下操作：</p>
+<ol>
+<li><p>保存系统重置应用权限所需等待的默认时长。在测试后恢复此设置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">threshold&#x3D;$(adb shell device_config get permissions \</span><br><span class="line">  auto_revoke_unused_threshold_millis2)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>减少系统重置权限所需等待的时长。下面的示例对系统进行了修改，以致当您停止与应用互动后仅一秒钟，系统就会重置应用的权限：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adb shell device_config put permissions \</span><br><span class="line">  auto_revoke_unused_threshold_millis2 1000</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>手动调用自动重置进程，如以下代码段所示。在运行此命令之前，请确保测试设备已开启片刻（大约 45 秒钟）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adb shell cmd jobscheduler run -u 0 -f \</span><br><span class="line">  com.google.android.permissioncontroller 2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>验证应用能否处理自动重置事件。</p>
+</li>
+<li><p>恢复系统在自动重置应用权限之前所需等待的默认时长：</p>
+<p><code>adb shell device_config put permissions \  auto_revoke_unused_threshold_millis2 $threshold</code></p>
+</li>
+</ol>
+<p><strong>总结：应用如果长时间不使用，系统会收回之前授予的权限，此外，测试自动重置功能的时候我们可以发现这个时间OEM可以自己定义，而且这个功能OEM也可以选择停用</strong></p>
+<h4 id="1-4、其他一些权限相关的调整"><a href="#1-4、其他一些权限相关的调整" class="headerlink" title="1.4、其他一些权限相关的调整"></a>1.4、其他一些权限相关的调整</h4><h5 id="1-4-1、权限对话框的可见性"><a href="#1-4-1、权限对话框的可见性" class="headerlink" title="1.4.1、权限对话框的可见性"></a>1.4.1、权限对话框的可见性</h5><p>Android 11 建议不要请求用户已选择拒绝的权限。在应用安装到设备上后，如果用户在使用过程中屡次针对某项特定的权限点按<strong>拒绝</strong>，此操作表示其希望“不再询问” </p>
+<p>应用：我连舔狗都不配当了吗？</p>
+<h5 id="1-4-2、系统提醒窗口变更"><a href="#1-4-2、系统提醒窗口变更" class="headerlink" title="1.4.2、系统提醒窗口变更"></a>1.4.2、系统提醒窗口变更</h5><p>向应用授予 [<code>SYSTEM_ALERT_WINDOW</code>] 权限的方式发生了一些变更。这些变更可以让权限的授予更有目的性，从而达到保护用户的目的</p>
+<p>根据请求自动向某些应用授予 SYSTEM_ALERT_WINDOW 权限</p>
+<p>系统会根据请求自动向某些类型的应用授予 <code>SYSTEM_ALERT_WINDOW</code> 权限：</p>
+<ul>
+<li>系统会自动向具有 [<code>ROLE_CALL_SCREENING</code>] 且请求 <code>SYSTEM_ALERT_WINDOW</code> 的所有应用授予该权限。如果应用失去 <code>ROLE_CALL_SCREENING</code>，就会失去该权限</li>
+<li>系统会自动向通过 [<code>MediaProjection</code>]截取屏幕且请求 <code>SYSTEM_ALERT_WINDOW</code> 的所有应用授予该权限，除非用户已明确拒绝向应用授予该权限。当应用停止截取屏幕时，就会失去该权限。此用例主要用于游戏直播应用</li>
+</ul>
+<p>这些应用无需发送 [<code>ACTION_MANAGE_OVERLAY_PERMISSION</code>] 以获取 <code>SYSTEM_ALERT_WINDOW</code> 权限，它们只需直接请求 <code>SYSTEM_ALERT_WINDOW</code> 即可</p>
+<p>MANAGE_OVERLAY_PERMISSION intent 始终会将用户转至系统权限屏幕</p>
+<p>从 Android 11 开始，[<code>ACTION_MANAGE_OVERLAY_PERMISSION</code>] intent 始终会将用户转至顶级<strong>设置</strong>屏幕，用户可在其中授予或撤消应用的 [<code>SYSTEM_ALERT_WINDOW</code>] 权限。intent 中的任何 <code>package:</code> 数据都会被忽略</p>
+<p>在更低版本的 Android 中，<code>ACTION_MANAGE_OVERLAY_PERMISSION</code> intent 可以指定一个软件包，它会将用户转至应用专用屏幕以管理权限。Android 11 不再支持此功能，而是必须由用户先选择要对其授予或撤消权限的应用。此变更可以让权限的授予更有目的性，从而达到保护用户的目的</p>
+<p>总结：针对部分应用自动赋予系统提醒窗口权限，其他应用申请系统提醒窗口权限需要用户从顶级设置屏幕进入，选择该应用才能赋予</p>
+<h5 id="1-4-3、电话号码权限变更"><a href="#1-4-3、电话号码权限变更" class="headerlink" title="1.4.3、电话号码权限变更"></a>1.4.3、电话号码权限变更</h5><p>Android 11 更改了您的应用在读取电话号码时使用的与电话相关的权限</p>
+<p>如果应用以 Android 11 为目标平台，而且需要调用下列方法必须请求 [<code>READ_PHONE_NUMBERS</code>] 权限，而不是 <code>READ_PHONE_STATE</code> 权限</p>
+<ul>
+<li>[<code>TelephonyManager</code>] 类和 [<code>TelecomManager</code>] 类中的 <code>getLine1Number()</code> 方法</li>
+<li>[<code>TelephonyManager</code>] 类中不受支持的 <code>getMsisdn()</code> 方法</li>
+</ul>
+<h4 id="1-5、后台位置信息访问权限"><a href="#1-5、后台位置信息访问权限" class="headerlink" title="1.5、后台位置信息访问权限"></a>1.5、后台位置信息访问权限</h4><p>Android 11 更改了应用中的功能获取后台位置信息访问权限的方式</p>
+<h5 id="1-5-1、单独请求在后台访问位置信息"><a href="#1-5-1、单独请求在后台访问位置信息" class="headerlink" title="1.5.1、单独请求在后台访问位置信息"></a>1.5.1、单独请求在后台访问位置信息</h5><p>如果应用以 Android 11 为目标平台，系统会强制执行此最佳做法。如果同时请求前台位置信息和后台位置信息，系统会忽略该请求</p>
+<h5 id="1-5-2、权限对话框的变更"><a href="#1-5-2、权限对话框的变更" class="headerlink" title="1.5.2、权限对话框的变更"></a>1.5.2、权限对话框的变更</h5><p>在搭载 Android 11 的设备上，当应用中的某项功能请求在后台访问位置信息时，用户看到的系统对话框不再包含用于启用后台位置信息访问权限的按钮。如需启用后台位置信息访问权限，用户必须在设置页面上针对应用的位置权限设置<strong>一律允许</strong>选项</p>
+<p>在针对后台位置信息请求运行时权限时，遵循最佳做法，帮助用户导航到此设置页面。授予权限的过程取决于应用的目标 SDK 版本</p>
+<p>以 Android 11 为目标平台的应用</p>
+<p>如果 shouldShowRequestPermissionRationale()返回 true，向用户显示包含以下内容的指导界面：</p>
+<ul>
+<li>明确说明应用功能需要在后台访问位置信息的原因</li>
+<li>用于授予后台位置权限的设置选项的用户可见标签。可以调用 [<code>getBackgroundPermissionOptionLabel()</code>]获取此标签。此方法的返回值会根据用户设备的语言偏好设置进行本地化</li>
+<li>供用户拒绝授予权限的选项。如果用户拒绝应用在后台访问位置信息，他们应该能够继续使用应用</li>
+</ul>
+<p>以 Android 10 或更低版本为目标平台的应用</p>
+<p>当应用中的某项功能请求后台位置信息访问权限时，用户会看到一个系统对话框。此对话框包含一个选项，可用于导航到设置页面上的应用位置权限选项</p>
+<h4 id="1-6、软件包可见性"><a href="#1-6、软件包可见性" class="headerlink" title="1.6、软件包可见性"></a>1.6、<strong>软件包可见性</strong></h4><p>Android 11 更改了应用查询用户已在设备上安装的其他应用以及与之交互的方式。使用新的 <code>&lt;queries&gt;</code> 元素，应用可以定义一组自身可访问的其他应用。通过告知系统应向您的应用显示哪些其他应用，此元素有助于鼓励最小权限原则</p>
+<ul>
+<li>如果应用以 Android 11 为目标平台，可能需要在应用的清单文件中添加 <code>&lt;queries&gt;</code> 元素。在 <code>&lt;queries&gt;</code> 元素中，可以通过<strong>包名、intent或provider</strong>指定应用</li>
+</ul>
+<ul>
+<li>返回其他应用相关结果的 <code>PackageManager</code> 方法（如 [<code>queryIntentActivities()</code>]会根据发起调用的应用的 <code>&lt;queries&gt;</code> 声明进行过滤。与其他应用的显式交互（如 [<code>startService()</code>]还要求目标应用与 <code>&lt;queries&gt;</code> 中的某项声明相符</li>
+<li>在极少数情况下，应用可能需要查询设备上的所有已安装应用或与之交互，不管这些应用包含哪些组件。为了允许应用看到其他所有已安装应用，Android 11 引入了 **QUERY_ALL_PACKAGES **权限</li>
+</ul>
+<h4 id="1-7、前台服务"><a href="#1-7、前台服务" class="headerlink" title="1.7、前台服务"></a>1.7、前台服务</h4><p>在 Android 11（API 级别 30）中，前台服务何时可以访问设备的位置信息、摄像头和麦克风发生了一些变化。这些变更有助于保护敏感的用户数据</p>
+<h5 id="1-7-1、使用时访问的限制"><a href="#1-7-1、使用时访问的限制" class="headerlink" title="1.7.1、使用时访问的限制"></a><strong>1.7.1、使用时访问的限制</strong></h5><p>应用在后台运行时启动前台服务，该服务就具有以下访问限制：</p>
+<ul>
+<li>除非用户已向您的应用授予 <code>ACCESS_BACKGROUND_LOCATION</code> 权限，否则该服务无法访问位置信息</li>
+<li>该服务无法访问麦克风或摄像头</li>
+</ul>
+<p>应用在前台运行时启动前台服务，该服务就具有以下访问许可：</p>
+<ul>
+<li>如果用户已向您的应用授予 <code>ACCESS_BACKGROUND_LOCATION</code> 权限，该服务就始终都能访问位置信息。否则，如果用户已向您的应用授予 <code>ACCESS_FINE_LOCATION</code>或 <code>ACCESS_COARSE_LOCATION</code>权限，该服务就可以在使用时访问位置信息</li>
+<li>如果用户已向您的应用授予 <code>CAMERA</code> 权限，该服务就可以在使用时访问摄像头</li>
+<li>如果用户已向您的应用授予 <code>RECORD_AUDIO</code> 权限，该服务就可以在使用时访问麦克风</li>
+</ul>
+<p><strong>什么是后台应用</strong></p>
+<p>只要满足以下各个条件，就会将应用视为在后台运行：</p>
+<ol>
+<li>该应用的所有 Activity 目前对用户都不可见</li>
+<li>该应用目前未运行任何在它的某个 Activity 对用户可见时启动的前台服务。</li>
+</ol>
+<p>以下列表显示了应用在后台运行时管理的常见待处理任务：</p>
+<ul>
+<li>应用在清单文件中注册广播接收器</li>
+<li>应用使用闹钟管理器设定重复闹钟</li>
+<li>应用使用工作管理器将后台任务调度为工作器，或使用作业调度程序将后台任务调度为作业</li>
+</ul>
+<p><strong>有一些例外的情况</strong></p>
+<p>在以下某种情况下启动前台服务时，该服务在使用时访问位置信息、摄像头和麦克风不受限制：</p>
+<ul>
+<li>该服务由系统组件启动</li>
+<li>该服务通过与应用微件进行交互启动</li>
+<li>该服务通过与通知进行交互启动</li>
+<li>该服务作为从其他可见应用发送的 <code>PendingIntent</code> 启动</li>
+<li>该服务由作为在设备所有者模式下运行的设备政策控制器的应用启动</li>
+<li>该服务由提供 <code>VoiceInteractionService</code> 的应用启动</li>
+<li>该服务由具有 <code>START_ACTIVITIES_FROM_BACKGROUND</code> 特权的应用启动</li>
+</ul>
+<p>此外，如果服务的前台服务类型为 <code>location</code> 并且由具有 <code>ACCESS_BACKGROUND_LOCATION</code>权限的应用启动，则该服务始终都能访问位置信息</p>
+<h5 id="1-7-2、前台服务的类型"><a href="#1-7-2、前台服务的类型" class="headerlink" title="1.7.2、前台服务的类型"></a><strong>1.7.2、前台服务的类型</strong></h5><p>如果应用以 Android 11 为目标平台并且在前台服务中访问摄像头或麦克风，您需要在该前台服务的声明的 <code>foregroundServiceType</code> 属性中添加新的 <code>camera</code> 和 <code>microphone</code> 类型</p>
+<p><strong>注意</strong>：虽然添加前台服务类型使前台服务能够访问摄像头和麦克风，但从在后台运行的应用启动此前台服务时，它仍受到使用时权限的限制</p>
+<p>默认情况下，如果在运行时调用 <code>startForeground()</code>，系统允许访问在应用清单中声明的每个服务类型。当然我们也可以选择限制对声明的一部分服务类型的访问</p>
+<p><strong>举个例子</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">manifest</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="tag">&lt;<span class="name">service</span> <span class="attr">...</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:foregroundServiceType</span>=<span class="string">&quot;location|camera|microphone&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>上述清单文件声明的三个服务类型，我们可以限制部分声明的服务类型</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Notification notification = ...;</span><br><span class="line">Service.startForeground(notification,</span><br><span class="line">        FOREGROUND_SERVICE_TYPE_LOCATION | FOREGROUND_SERVICE_TYPE_CAMERA);</span><br></pre></td></tr></table></figure>
+
+<p>这里之就限制了只可以使用位置信息和摄像头</p>
+<h3 id="2、功能和API"><a href="#2、功能和API" class="headerlink" title="2、功能和API"></a>2、功能和API</h3><h4 id="2-1、设备控件"><a href="#2-1、设备控件" class="headerlink" title="2.1、设备控件"></a>2.1、设备控件</h4><p>Android 11 包含一个新的 <code>ControlsProviderService</code>API，可用于提供所连接的外部设备的控件。这些控件显示于 Android 电源菜单中的<strong>设备控制器</strong>下。</p>
+<p>长按power键进入：</p>
+<img src="/home/yaoyifei/.config/Typora/typora-user-images/image-20200909164153413.png" alt="image-20200909164153413" style="zoom: 50%;" />
+
+<h4 id="2-2、媒体控件"><a href="#2-2、媒体控件" class="headerlink" title="2.2、媒体控件"></a>2.2、媒体控件</h4><p>Android 11 更新了媒体控件的显示方式。媒体控件显示于快捷设置旁。来自多个应用的会话排列在一个可滑动的轮播界面中，其中包括在手机本地播放的会话流、远程会话流（例如在外部设备上检测到的会话或投射会话）以及可继续播放的以前的会话（按上次播放的顺序排列）</p>
+<p>用户无需启动相关应用即可在轮播界面中重新开始播放以前的会话。当播放开始后，用户可按常规方式与媒体控件互动</p>
+<h4 id="2-3、屏幕相关"><a href="#2-3、屏幕相关" class="headerlink" title="2.3、屏幕相关"></a>2.3、屏幕相关</h4><p><strong>更好地支持瀑布屏</strong></p>
+<p>Android 11 提供了一些 API 以支持瀑布屏，这是一种无边框的全面屏。这种显示屏被视为刘海屏的变体。现有的 <code>DisplayCutout.getSafeInset…()</code> 方法现在会返回能够避开瀑布区域以及刘海的<strong>安全边衬区</strong>。如需在瀑布区域中呈现应用内容，请执行以下操作：</p>
+<ul>
+<li>调用 <code>DisplayCutout.getWaterfallInsets()</code> 以获取瀑布边衬区的精确尺寸</li>
+<li>将窗口布局属性 <code>layoutInDisplayCutoutMode</code> 设为 [<code>LAYOUT_IN_DISPLAY_CUTOUT_MODE_ALWAYS</code>]，以允许窗口延伸到屏幕各个边缘上的刘海和瀑布区域。但是必须确保刘海或瀑布区域中没有重要的内容</li>
+</ul>
+<p><strong>注意</strong>：如果未将上述窗口布局属性设为 <code>LAYOUT_IN_DISPLAY_CUTOUT_MODE_ALWAYS</code>，Android 会在黑边模式下显示窗口，从而避开缺口和瀑布区域</p>
+<p><strong>新增合页角度传感器更好地支持可折叠设备</strong></p>
+<p>使用 Android 11，可以通过以下方法使运行在采用合页式屏幕配置的设备上的应用能够确定合页角度：</p>
+<p>提供具有 <code>TYPE_HINGE_ANGLE</code>的新传感器，以及新的 <code>SensorEvent</code>，后者可以监控合页角度，并提供设备的两部分之间的角度测量值</p>
+<p>使用这些原始测量值在用户操作设备时执行精细的动画显示</p>
+<p>尽管对于某些类型的应用（例如启动器和壁纸）而言，知道确切的合页角度会很有用，但大多数应用都应该使用 <strong>Jetpack窗口管理器库</strong>，通过调用 <code>DeviceState.getPosture()</code> 检索设备状态</p>
+<p>也可以调用registerDeviceStateChangeCallback()，以在 <code>DeviceState</code> 更改时收到通知，并在状态发生变化时做出响应。</p>
+<blockquote>
+<p>Jetpack 是一个由多个库组成的套件，可帮助开发者遵循最佳做法，减少样板代码并编写可在各种 Android 版本和设备中一致运行的代码，让开发者精力集中编写重要的代码。</p>
+</blockquote>
+<p>android11针对刘海屏、瀑布屏、折叠屏等进行了适配</p>
+<h4 id="2-4、会话相关"><a href="#2-4、会话相关" class="headerlink" title="2.4、会话相关"></a><strong>2.4、会话相关</strong></h4><p><strong>改进了会话——会话通知</strong></p>
+<img src="/home/yaoyifei/.config/Typora/typora-user-images/image-20200909172704302.png" alt="image-20200909172704302" style="zoom: 50%;" />
+
+<p><strong>点击</strong>: 启动 activity<br><strong>长按</strong>: 添加到桌面，显示气泡，提醒我，设置重要性</p>
+<p><strong>聊天气泡</strong></p>
+<p>气泡是 Android 10 中的一项实验性功能，需要通过开发者选项启用；在 Android 11 中，不再需要如此操作</p>
+<p><strong>气泡位于应用程序上方的浮动窗口中，显示在屏幕左/右边缘的小图标，新建时会弹出消息视图</strong></p>
+<img src="/home/yaoyifei/.config/Typora/typora-user-images/image-20200909173259146.png" alt="image-20200909173259146" style="zoom:50%;" />
+
+<img src="/home/yaoyifei/.config/Typora/typora-user-images/image-20200909173554365.png" alt="image-20200909173554365" style="zoom:50%;" />
+
+<p><strong>何时显示气泡</strong>：</p>
+<p>为了减少对用户造成干扰的次数，气泡仅会在满足以下一个或多个条件时显示：</p>
+<ul>
+<li>通知使用 [MessagingStyle]，并添加了 [Person]</li>
+<li>通知来自对 Service.startForeground 的调用，类别为 CATEGORY_CALL，并添加了 Person</li>
+<li>发送通知时，应用在前台运行</li>
+</ul>
+<p>如果上述条件均不满足，则仅显示通知</p>
+<p><strong>怎样发送气泡</strong>：</p>
+<ul>
+<li>按照一般步骤创建通知。</li>
+<li>调用 <code>Notification.BubbleMetadata.Builder</code>以创建 BubbleMetadata 对象</li>
+<li>使用 <code>setBubbleMetadata</code> 将元数据添加到通知中</li>
+</ul>
+<p>气泡功能有多项改进，现在用户可以更灵活地在每个应用中启用和停用气泡功能。对于实现了实验性支持的开发者，<strong>Android 11 中的 API 有一些变更</strong>：</p>
+<ul>
+<li>不带参数的 <code>BubbleMetadata.Builder()</code>构造函数已弃用。改为使用 <code>BubbleMetadata.Builder(PendingIntent, Icon)</code>(android.app.PendingIntent, android.graphics.drawable.Icon)) 和 <code>BubbleMetadata.Builder(String)</code>这两个新构造函数中的任意一个</li>
+<li>通过调用 <code>BubbleMetadata.Builder(String)</code>，根据快捷方式 ID 创建 <code>BubbleMetadata</code>传递的字符串应与提供给 <code>Notification.Builder</code> 的快捷方式 ID 一致</li>
+<li>使用 <code>Icon.createWithContentUri()</code> 或新方法 <code>createWithAdaptiveBitmapContentUri()</code> 创建气泡图标</li>
+</ul>
+<h4 id="2-5、5G图标显示"><a href="#2-5、5G图标显示" class="headerlink" title="2.5、5G图标显示"></a>2.5、5G图标显示</h4><p>在 Android 11（API 级别 30）及更高版本中，具有 <code>android.Manifest.permission.READ_PHONE_STATE</code> 权限的应用可以通过 <code>PhoneStateListener.onDisplayInfoChanged()</code> 请求更新电话显示信息，其中包括用于营销和品牌塑造的无线接入技术信息。</p>
+<p>这款新 API 提供了适用于不同运营商的各种 5G 图标显示解决方案。支持的技术包括：</p>
+<ul>
+<li>LTE</li>
+<li>采用载波聚合技术的 LTE (LTE+)</li>
+<li>高级专业版 LTE (5Ge)</li>
+<li>NR (5G)</li>
+<li>毫米波移动网络频段上的 NR (5G+)</li>
+</ul>
+<h4 id="2-6、安全相关"><a href="#2-6、安全相关" class="headerlink" title="2.6、安全相关"></a>2.6、安全相关</h4><p><strong>生物识别身份验证机制更新</strong></p>
+<p>Android 11 引入了 <code>BiometricManager.Authenticators</code> 接口，该接口定义了 <code>BiometricManager</code> 类支持的身份验证类型：</p>
+<ul>
+<li><p><code>BIOMETRIC_STRONG</code></p>
+<p>使用满足[兼容性定义]页面上定义的<strong>强</strong>强度级别要求的硬件元素进行身份验证</p>
+</li>
+<li><p><code>BIOMETRIC_WEAK</code><br>使用满足[兼容性定义]页面上定义的<strong>弱</strong>强度级别要求的硬件元素进行身份验证</p>
+</li>
+<li><p><code>DEVICE_CREDENTIAL</code><br>使用屏幕锁定凭据（即用户的 PIN 码、解锁图案或密码）进行身份验证</p>
+</li>
+</ul>
+<p><strong>安全共享大型数据集</strong></p>
+<p>在某些情况下，例如涉及机器学习或媒体播放时，我们的应用可能需要与其他应用使用同一个大型数据集</p>
+<p>在较早的 Android 版本中，我们的应用与其他应用需要各自单独下载该数据集，为帮助减少网络中和磁盘上的数据冗余，Android 11 允许使用共享数据 blob 在设备上缓存这些大型数据集</p>
+<p><strong>因 OTA 更新而重启设备后在未提供用户凭据的情况下执行文件级加密</strong></p>
+<p>设备完成 OTA 更新并重启后，放在受凭据保护的存储空间中的凭据加密 (CE) 密钥可立即用于执行文件级加密 (FBE)操作</p>
+<p>这意味着，完成 OTA 更新后，应用可以在用户输入其 PIN 码、解锁图案或密码之前恢复需要 CE 密钥的操作</p>
+<h4 id="2-7、性能和质量"><a href="#2-7、性能和质量" class="headerlink" title="2.7、性能和质量"></a>2.7、性能和质量</h4><p><strong>无线调试</strong></p>
+<p>Android 11 支持通过 Android 调试桥 (adb) 从工作站以无线方式部署和调试应用</p>
+<p>可以将可调试的应用部署到多台远程设备，而无需通过 USB 实际连接您的设备，从而避免常见的 USB 连接问题（例如驱动程序安装方面的问题）</p>
+<p><strong>ADB 增量 APK 安装</strong></p>
+<p>在设备上安装大型（2GB 以上）APK 可能需要很长的时间，即使应用只是稍作更改也是如此。ADB（Android 调试桥）增量 APK 安装可以安装足够的 APK 以启动应用，同时在后台流式传输剩余数据，从而加速这一过程。如果设备支持该功能，并且安装了最新的SDK 平台工具，<code>adb install</code> 将自动使用此功能。如果不支持，系统会自动使用默认安装方法</p>
+<p>运行<strong>adb install –incremental</strong>命令以使用该功能。如果设备不支持增量安装，该命令将会失败并输出详细的解释</p>
+<p>在运行 ADB 增量 APK 安装之前，您必须先为 APK 签名并创建一个<strong>APK 签名方案 v4 文件</strong>。必须将 v4 签名文件放在 APK 旁边，才能使此功能正常运行</p>
+<p><strong>APK 签名方案 v4 文件</strong></p>
+<p>Android 11 添加了对APK 签名方案 v4的支持。此方案会在单独的文件 (<code>apk-name.apk.idsig</code>) 中生成一种新的签名，但在其他方面与 v2 和 v3 类似。没有对 APK 进行任何更改。此方案支持ADB 增量 APK 安装，这样会加快 APK 安装速度</p>
+<p><strong>文本和输入</strong></p>
+<p><strong>改进了 IME 转换</strong></p>
+<p>Android 11 引入了新的 API 以改进输入法 (IME) 的转换，例如屏幕键盘。这些 API 可让您更轻松地调整应用内容，与 IME 的出现和消失以及状态和导航栏等其他元素保持同步</p>
+<p>如需在聚焦至任何 <code>EditText</code> 时显示 IME调用 <code>view.getInsetsController().show(Type.ime())</code></p>
+<p>隐藏 IME调用 <code>view.getInsetsController().hide(Type.ime())</code></p>
+<p>调用 <code>view.getRootWindowInsets().isVisible(Type.ime())</code> 检查 IME 当前是否可见</p>
+<p>同步应用的视图与 IME 的显示和消失，通过提供 <code>WindowInsetsAnimation.Callback</code> 到 <code>View.setWindowInsetsAnimationCallback()</code>在视图上设置监听器</p>
+<p>IME 会调用监听器的 <code>onPrepare()</code> 方法，之后会在转换开始时调用 <code>onStart()</code>。然后，它会在每次转换的过程中调用 <code>onProgress()</code>。转换完成后，IME 会调用 <code>onEnd()</code></p>
+<p>在转换过程中，您随时可以调用 <code>WindowInsetsAnimation.getFraction()</code> 以了解转换的进度</p>
+<blockquote>
+<p>有关如何使用这些 API 的示例，请参阅<a target="_blank" rel="noopener" href="https://github.com/android/user-interface-samples/tree/master/WindowInsetsAnimation">https://github.com/android/user-interface-samples/tree/master/WindowInsetsAnimation</a></p>
+</blockquote>
+<h4 id="2-8、其他功能"><a href="#2-8、其他功能" class="headerlink" title="2.8、其他功能"></a>2.8、其他功能</h4><p><strong>Frame rate API</strong></p>
+<p>Android 11 提供了一个 API，可让应用告知系统其预期帧速率，从而减少支持多个刷新率的设备上的抖动，适配高刷新率</p>
+<p><strong>支持并发使用多个摄像头</strong></p>
+<p>Android 11 添加了 API 以查询对同时使用多个摄像头（包括前置摄像头和后置摄像头）的支持</p>
+<p>如需在运行应用的设备上检查支持情况，请使用以下方法：</p>
+<ul>
+<li><code>getConcurrentCameraIds()</code>可返回摄像头 ID 组合 <code>Set</code>，这些组合可与有保证的数据流组合并发进行流式传输（如果它们是由同一应用进程配置的）</li>
+<li><code>isConcurrentSessionConfigurationSupported()</code> 可查询摄像头设备是否可以并发支持相应的会话配置</li>
+</ul>
+<p><strong>应用进程退出原因</strong></p>
+<p>Android 11 引入了 <code>ActivityManager.getHistoricalProcessExitReasons()</code>方法，用于报告近期任何进程终止的原因。应用可以使用此方法收集崩溃诊断信息，例如进程终止是由于 ANR、内存问题还是其他原因所致。</p>
+<p>此外，还可以使用新的 <code>setProcessStateSummary()</code>方法存储自定义状态信息，以便日后进行分析</p>
+<p><code>getHistoricalProcessExitReasons()</code> 方法会返回 <code>ApplicationExitInfo</code> 类的实例，该类包含与应用进程终止相关的信息。通过对此类的实例调用 <code>getReason()</code>，您可以确定应用进程终止的原因。</p>
+<p>例如，返回值为 <code>REASON_CRASH</code> 表示您的应用中发生了未处理的异常。如果您的应用需要确保退出事件的唯一性，它可以维护一个应用专用的标识符，如基于来自 <code>getTimestamp()</code> 方法的时间戳的哈希值</p>
+<blockquote>
+<p><strong>注意</strong>：某些设备无法报告内存不足终止事件。在这些设备上，<code>getHistoricalProcessExitReasons()</code> 方法会返回 <code>REASON_SIGNALED</code> 而不是 <code>REASON_LOW_MEMORY</code>，并且 <code>getStatus()</code>的返回值为 <code>SIGKILL</code></p>
+<p>如需检查设备是否可以报告内存不足终止事件，请调用 <code>ActivityManager.isLowMemoryKillReportSupported()</code></p>
+</blockquote>
+<h3 id="3、Window-Management的变化"><a href="#3、Window-Management的变化" class="headerlink" title="3、Window Management的变化"></a>3、Window Management的变化</h3><h4 id="3-1、WM结构和功能的变化"><a href="#3-1、WM结构和功能的变化" class="headerlink" title="3.1、WM结构和功能的变化"></a>3.1、WM结构和功能的变化</h4><p>从androidR开始，wm / wms被重构为 wm core 和 wm shell，以及附加的 wm jetpack 组件。</p>
+<p><strong>wm / wms ——&gt; wm core + wm shell + wm jetpack</strong> </p>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">运行所在的进程</th>
+<th align="left">功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">wm core</td>
+<td align="left">system server</td>
+<td align="left">WM core仅包含与策略相关的代码，功能策略实施和一致性层，主线模块</td>
+</tr>
+<tr>
+<td align="left">wm shell</td>
+<td align="left">SystenUI</td>
+<td align="left">表示和定制层，AOSP包含默认实现，OEM可以定制特定的闭源产品</td>
+</tr>
+<tr>
+<td align="left">wm jetpack</td>
+<td align="left">App</td>
+<td align="left">API 层 WM的支持库</td>
+</tr>
+</tbody></table>
+<p>androidR之前：</p>
+<img src="/home/yaoyifei/图片/2020-09-10 16-22-10屏幕截图.png" alt="2020-09-10 16-22-10屏幕截图"  />
+
+<p>androidR以后</p>
+<p>![2020-09-10 16-54-26屏幕截图](/home/yaoyifei/图片/2020-09-10 16-54-26屏幕截图.png)</p>
+<p>WM核心仅包含与策略相关的代码，与呈现相关的所有内容（例如应用程序/窗口动画）都移至wm shell并在systemui中运行<br>Shell通过新的TaskOrganizer API与内核进行通信</p>
+<h4 id="3-2、TaskOrganizer-API"><a href="#3-2、TaskOrganizer-API" class="headerlink" title="3.2、TaskOrganizer API"></a>3.2、TaskOrganizer API</h4><p>WM core 实现ITaskOrganizerController接收并执行请求。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">frameworks/base/core/java/android/app/ITaskOrganizerController.aidl</span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">ITaskOrganizerController</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">registerTaskOrganizer</span><span class="params">(ITaskOrganizer organizer, intwindowingMode)</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">applyContainerTransaction</span><span class="params">(in WindowContainerTransaction t, ITaskOrganizer organizer)</span></span>;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>WM Shell 实现ITaskOrganizer接收来自核心的回调</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">frameworks/base/core/java/android/view/ITaskOrganizer.aidl</span><br><span class="line">oneway <span class="class"><span class="keyword">interface</span> <span class="title">ITaskOrganizer</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">taskAppeared</span><span class="params">(in ActivityManager.RunningTaskInfo taskInfo)</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">taskVanished</span><span class="params">(in IWindowContainer container)</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">transactionReady</span><span class="params">(<span class="keyword">int</span> id, in SurfaceControl.Transaction t)</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">onTaskInfoChanged</span><span class="params">(in ActivityManager.RunningTaskInfo info)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个’任务组织者‘是systemUI和system server之间的媒介</p>
+<h4 id="3-3、新的WindowInsets"><a href="#3-3、新的WindowInsets" class="headerlink" title="3.3、新的WindowInsets"></a>3.3、新的WindowInsets</h4><p>R以前：</p>
+<p>view.setSystemUiVisibility(SYSTEM_UI_FLAG_HIDE_NAVIGATION)<br>view.setSystemUiVisibility(SYSTEM_UI_FLAG_IMMERSIVE)<br>view.setSystemUiVisibility(SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)</p>
+<p>R以后：</p>
+<p>wic = view.getWindowInsetsController()<br>wic.hide(WindowInsets.Type.navigationBar())<br>wic.setBehavior(BEHAVIOR_SHOW_BARS_BY_SWIPE)<br>wic.setAppearance(APPEARANCE_LIGHT_STATUS_BAR)</p>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">yaoyifei</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2020/09/16/Android%20R%20%E6%96%B0%E7%89%B9%E6%80%A7/">http://example.com/2020/09/16/Android%20R%20%E6%96%B0%E7%89%B9%E6%80%A7/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">yifei</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/android/">android</a><a class="post-meta__tags" href="/tags/framework/">framework</a></div><div class="post_share"><div class="social-share" data-image="http://www.dmoe.cc/random.php" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/09/16/Android%20WatchDog/"><img class="prev-cover" src="https://acg.yanwz.cn/api.php" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Android WatchDog</div></div></a></div><div class="next-post pull-right"><a href="/2020/09/16/ActivityManagerService/"><img class="next-cover" src="https://acg.yanwz.cn/api.php" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">ActivityManagerService</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/09/15/深入理解android内核设计思想读书笔记/" title="深入理解android内核设计思想读书笔记"><img class="cover" src="https://img.paulzzh.tech/touhou/random"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-15</div><div class="title">深入理解android内核设计思想读书笔记</div></div></a></div><div><a href="/2020/09/16/Zygote进程启动流程/" title="Zygote进程启动过程"><img class="cover" src="https://acg.yanwz.cn/api.php"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-16</div><div class="title">Zygote进程启动过程</div></div></a></div><div><a href="/2020/09/16/ActivityManagerService/" title="ActivityManagerService"><img class="cover" src="https://acg.yanwz.cn/api.php"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-16</div><div class="title">ActivityManagerService</div></div></a></div><div><a href="/2020/09/16/Android WatchDog/" title="Android WatchDog"><img class="cover" src="https://acg.yanwz.cn/api.php"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-16</div><div class="title">Android WatchDog</div></div></a></div></div></div></article></main><footer id="footer" style="background-image: url(http://www.dmoe.cc/random.php)"><div id="footer-wrap"><div class="copyright">&copy;2020 By yaoyifei</div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><div class="js-pjax"></div></div></body></html>
